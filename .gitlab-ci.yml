@@ -6,7 +6,9 @@ stages:
   - deploy
 heroku-deployment:
   stage: deploy
+  only:
+    - master
   script:
   - npm install --production
-  - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/hackernewsapp.git HEAD:refs/heads/master
-
+  - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/hacker-newsapp.git
+  - git push -f heroku master

@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
                 <div id="root">{{{comp}}}</div>
                 <script src="/app.js" charset="utf-8"></script>
                 <script src="/main.js" charset="utf-8"></script>
+                <link href="/styles.css" charset="utf-8" />
             </body>
         </html>
         `;

@@ -4,21 +4,24 @@
   "description": "Tesco Assignment",
   "main": "index.js",
   "scripts": {
-    "dev:build-server": "webpack --config webpack.ssr.config.js --watch",
-    "dev:build-fe": "webpack -wd",
-    "dev:start": "nodemon --watch build --watch public/app.js --exec \"node ./build/server.js\"",
-    "dev": "npm-run-all --parallel dev:*",
+    "dev:build-server": "webpack --config webpack.ssr.config.js",
+    "dev:build-fe": "webpack",
+    "watch": "nodemon --watch build --watch public --exec \"node ./build/server.js\"",
+    "build": "npm-run-all --parallel dev:*",
     "start": "node ./build/server.js",
+    "lint": "./node_modules/.bin/eslint *.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "handlebars": "^4.7.6",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -30,12 +33,14 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "mini-css-extract-plugin": "^0.9.0",
     "npm-run-all": "^4.1.5",
+    "style-loader": "^1.1.4",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-cli": "^3.3.11"
   }
 }

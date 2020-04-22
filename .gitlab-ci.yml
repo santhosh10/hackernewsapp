@@ -8,4 +8,5 @@ heroku-deployment:
   stage: deploy
   script:
   - npm install --production
+  - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/hackernewsapp.git HEAD:refs/heads/master
 

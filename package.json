@@ -8,7 +8,7 @@
     "dev:build-fe": "webpack -wd",
     "dev:start": "nodemon --watch build --watch public/app.js --exec \"node ./build/server.js\"",
     "dev": "npm-run-all --parallel dev:*",
-    "start": "babel-node ./build/server.js",
+    "start": "node ./build/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -30,6 +30,9 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
     "npm-run-all": "^4.1.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",

@@ -1,0 +1,11 @@
+image: node:10.12.0
+
+stages: 
+  - build
+  - test
+  - deploy
+heroku-deployment:
+  stage: deploy
+  script:
+  - npm install --production
+

@@ -18,6 +18,7 @@ app.use(express.static('public'));
 
 // initial Route
 app.use('/', (req, res) => {
+  console.log('EntryPoint');
   const store = createStore();
   const dataLoadTasks = matchRoutes(Routes, req.path).map(({route}) => {
     return route.loadData ? route.loadData(store) : null;

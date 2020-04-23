@@ -3,7 +3,7 @@ import axios from 'axios';
 export const FETCH_FEEDS= 'fetchFeeds';
 export const fetchFeeds = (page) => async dispatch =>  {
 
-    const url =  'https://hn.algolia.com/api/v1/search?page='+ (page ? page : 2);
+    const url =  'https://hn.algolia.com/api/v1/search?page='+ (page ? page : 1);
     const res = await axios.get(url);
     dispatch({
         type: FETCH_FEEDS,

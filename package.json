@@ -4,10 +4,10 @@
   "description": "Tesco Assignment",
   "main": "index.js",
   "scripts": {
-    "dev:build-server": "webpack --config webpack.ssr.config.js",
-    "dev:build-fe": "webpack",
+    "build-server": "webpack --config webpack.ssr.config.js",
+    "build-fe": "webpack",
     "watch": "nodemon --watch build --watch public --exec \"node ./build/server.js\"",
-    "build": "npm-run-all --parallel dev:*",
+    "build": "npm-run-all --parallel build-*",
     "start": "node ./build/server.js",
     "lint": "./node_modules/.bin/eslint *.js",
     "test": "echo \"Error: no test specified\" && exit 1"

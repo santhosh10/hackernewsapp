@@ -18,15 +18,18 @@ export default (req, store) => {
         );
     const html = `
         <html>
-            <head><title>Hacker News</title></head>
+            <head>
+            <title>Hacker News</title>
+            <link rel="stylesheet" type="text/css" href="app.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            </head>
             <body>
                 <div id="root">${reactComp}</div>
                 <script>
-                    window.INITIAL_STATE=${serialize(store.getState())}
+                    window.INITIAL_STATE=${serialize(store.getState()).replace(/</g,'\\u003c')}
                 </script>
                 <script src="/app.js" charset="utf-8"></script>
                 <script src="/main.js" charset="utf-8"></script>    
-                <link rel="stylesheet" type="text/css" href="app.css">
             </body>
         </html>
         `;

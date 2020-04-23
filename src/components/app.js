@@ -1,67 +1,49 @@
-import React, { Fragment, useReducer } from "react";
-import moment from 'moment';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+import { useDispatch, connect } from 'react-redux';
 import { fetchFeeds } from '../actions';
-
-class App extends React.Component {
-    constructor(){
-        super();
-        this.page = 1;
-        this.loadMore = this.loadMore.bind(this);
-        this.upvoteHandler = this.upvoteHandler.bind(this);
-        this.hideFeed = this.hideFeed.bind(this);
-    }
-    renderFeeds(){
-        const feeds = this.props.feeds.map((feed, index) => {
+import Feed from './feed';
+const App = (props) => {
+    const dispatch = useDispatch();
+    const [page, setPage] = useState(1);
+    const [upVoteIcon, setUpVoteIcon] = useState(true);
+    const [point, setPoint] = useState(0);
+    
+    const renderFeeds = () => {
+        const feeds = props.feeds.map((feed, index) => {
             const domain = feed.url && feed.url.replace('http://','').replace('https://','').split(/[/?#]/)[0];
-            return (
-                <div key={index} className='feed-wrapper'>
-                    <div className='feed-comments'>{feed.num_comments}</div>
-                    <div className='feed-upvotes'>
-                    {feed.points}
-                    <span className='upvote-action' onClick={this.upvoteHandler}></span>
-                    </div>
-                    <div className='feed-title'>{feed.title}</div>
-                    <div className='feed-domain'>{domain ? `(${domain})` : ''}</div>
-                    <div className='feed-by-text'>{'by'}</div>
-                    <div className='feed-author'>{feed.author}</div>
-                    <div className='feed-time'>{moment(feed.created_at, "YYYYMMDD").fromNow()}</div>
-                    <div className='feed-hide-action'>[<span className='hide-text' onClick={this.hideFeed}>hide</span>]</div>
-                </div>
-              );
+            return <Feed feed={feed} domain={domain} index={index} key={feed.objectID} />;
         });
         return feeds;
     }
+    const loadMore = () => {
+        dispatch(fetchFeeds(page + 1));
+        setPage(page + 1);
+    }
+    return (
+        <div>
+            <div className='feed-header'>Hacker News Feeds</div>
+            {renderFeeds()}
+            <div className='feed-footer' onClick={loadMore}><span>More</span></div>
+        </div>
+    );
 
-    hideFeed(){
-        console.log('Hide Feed');
-    }
-    upvoteHandler() {
-        console.log('Increase Upvote');
-    }
-    loadMore(){
-        this.page += 1;
-        this.props.fetchFeeds(this.page);
-    }
-    render() {
-        return (
-            <div>
-                <div className='feed-header'>Hacker News Feeds</div>
-                {this.renderFeeds()}
-                <div className='feed-footer' onClick={this.loadMore}><span>More</span></div>
-            </div>
-            );
-            
-    }
 }
-function mapSateToProps(state) {
+const mapSateToProps = (state) => {
     return {
         feeds: state.feeds
     }
 }
-function loadData(store){
+const loadData = (store) => {
     return store.dispatch(fetchFeeds());
-
 }
+
+App.propTypes = {
+    feeds: PropTypes.arrayOf(PropTypes.any)
+};
+  
+App.defaultProps = {
+    feeds: []
+};
 export {loadData};
 export default connect(mapSateToProps, {fetchFeeds})(App);

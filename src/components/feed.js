@@ -7,8 +7,8 @@ const Feed = ({ feed, domain, index }) => {
     const [showFeed, setShowFeed] = useState(true);
     const [hideFeedOnLoad, setHideFeedOnLoad] = useState(false);
     const isHideFeed = () =>{
-        if(sessionStorage.getItem('hiddenFeeds')){
-            const hiddenFeeds = JSON.parse(sessionStorage.getItem('hiddenFeeds'));
+        if(localStorage.getItem('hiddenFeeds')){
+            const hiddenFeeds = JSON.parse(localStorage.getItem('hiddenFeeds'));
             const isHidden = hiddenFeeds.filter((itemId) => {
                 return feed.objectID === itemId;
             });
@@ -20,14 +20,14 @@ const Feed = ({ feed, domain, index }) => {
     }
     const hideFeed = () => {
         let newSession = [];
-        if (sessionStorage.getItem('hiddenFeeds')) {
-            newSession = JSON.parse(sessionStorage.getItem('hiddenFeeds'));
+        if (localStorage.getItem('hiddenFeeds')) {
+            newSession = JSON.parse(localStorage.getItem('hiddenFeeds'));
             newSession.push(feed.objectID);
-            sessionStorage.setItem('hiddenFeeds', JSON.stringify(newSession));
+            localStorage.setItem('hiddenFeeds', JSON.stringify(newSession));
         } else {
             newSession.push(feed.objectID);
                
-            sessionStorage.setItem('hiddenFeeds', JSON.stringify(newSession));
+            localStorage.setItem('hiddenFeeds', JSON.stringify(newSession));
         }
         setShowFeed(false);
     }

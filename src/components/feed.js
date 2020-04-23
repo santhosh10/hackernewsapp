@@ -7,7 +7,6 @@ const Feed = ({ feed, domain, index }) => {
     const [showFeed, setShowFeed] = useState(true);
     const [hideFeedOnLoad, setHideFeedOnLoad] = useState(false);
     const isHideFeed = () =>{
-        console.log('isHideFeed');
         if(sessionStorage.getItem('hiddenFeeds')){
             const hiddenFeeds = JSON.parse(sessionStorage.getItem('hiddenFeeds'));
             const isHidden = hiddenFeeds.filter((itemId) => {

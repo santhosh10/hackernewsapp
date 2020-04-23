@@ -10,11 +10,17 @@
     "build": "npm-run-all --parallel build-*",
     "start": "node ./build/server.js",
     "lint": "./node_modules/.bin/eslint *.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+     "./src/setupTests.js"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.8.7",
     "axios": "^0.19.2",
     "compression": "^1.7.4",
     "express": "^4.17.1",
@@ -28,8 +34,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^3.0.0",
-    "webpack-node-externals": "^1.7.2",
-    "@babel/polyfill": "^7.8.7"
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -41,9 +46,12 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "jest": "^25.4.0",
     "mini-css-extract-plugin": "^0.9.0",
     "npm-run-all": "^4.1.5",
     "style-loader": "^1.1.4",

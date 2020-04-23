@@ -6,8 +6,6 @@ import Feed from './feed';
 const App = (props) => {
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
-    const [upVoteIcon, setUpVoteIcon] = useState(true);
-    const [point, setPoint] = useState(0);
     
     const renderFeeds = () => {
         const feeds = props.feeds.map((feed, index) => {

@@ -1,6 +1,10 @@
+import "@babel/polyfill";
 import express from 'express';
 import compression from 'compression'
-import renderEngine from './routes/renderEngine';
+import { matchRoutes } from 'react-router-config';
+import Routes from './routes/Routes';
+import renderEngine from './renderer/renderEngine';
+import createStore from './renderer/createStore';
 
 //  Instantiating an express app
 const app = express();
@@ -10,14 +14,24 @@ const app = express();
 app.use(compression());
 app.use(express.static('public'));
 
-app.use('/', renderEngine);
 
+
+// initial Route
+app.use('/', (req, res) => {
+  const store = createStore();
+  const dataLoadTasks = matchRoutes(Routes, req.path).map(({route}) => {
+    return route.loadData ? route.loadData(store) : null;
+  });
+  Promise.all(dataLoadTasks).then(() => {
+    res.send(renderEngine(req, store));
+  })
+});
 
 // Server Port
 const port = process.env.PORT || 3000;
 
 // Start server
-const server = app.listen(port, () => {
+app.listen(port, () => {
   console.info(`Server Listening on port ${port}`);
 });
 

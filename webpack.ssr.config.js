@@ -30,7 +30,7 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css']
+    extensions: ['.js', '.jsx', '.json', '.css']
   },
   externals: [nodeExternal()]
 };

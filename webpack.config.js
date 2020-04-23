@@ -1,9 +1,18 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
   mode: 'development',
-  plugins: [ new MiniCssExtractPlugin()],
+  plugins: [ 
+    new MiniCssExtractPlugin(),
+    new CopyWebpackPlugin([
+          {
+            from: 'src/styles',
+            to: path.resolve(__dirname, 'public')
+          } 
+      ])
+  ],
   entry: {
     main: ['@babel/polyfill', 'react'],
     app: ['./src/components/index.js']
